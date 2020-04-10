@@ -58,23 +58,23 @@ def build_SimilarityMatrix(sentences, stop_words):
 
     return similarity_matrix
     
- #Here we well be using the code to generate the summary
- def generate_summary(file_name,top_n = 5):
-     stop_word = stopwords.words('english')
-     summarize_text = []
+#Here we well be using the code to generate the summary
+def generate_summary(file_name,top_n = 5):
+    stop_word = stopwords.words('english')
+    summarize_text = []
      
-     #step 1
-     #reading news articles and splitig it in to the sentence
-     sentences = read_article(file_name):
+    #step 1
+    #reading news articles and splitig it in to the sentence
+    sentences = read_article(file_name):
      
-     #step2
-     #generating similarity matrix across the sentences
-     sentence_similarity_martix  = build_SimilarityMatrix(sentences, stop_words)
+    #step2
+    #generating similarity matrix across the sentences
+    sentence_similarity_martix  = build_SimilarityMatrix(sentences, stop_words)
      
-     #step3
-     #Rank sentences in similarity martix
-     sentence_similarity_graph = networkx.from_numpy_array(sentence_similarity_martix)
-     scores = networkx.pagerank(sentence_similarity_graph)
+    #step3
+    #Rank sentences in similarity martix
+    sentence_similarity_graph = networkx.from_numpy_array(sentence_similarity_martix)
+    scores = networkx.pagerank(sentence_similarity_graph)
      
     #step4
     #sort the rank and pick the top rank sentences
