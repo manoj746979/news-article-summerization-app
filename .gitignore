@@ -44,3 +44,17 @@ def sent_similarity(sentence1, sentence2, stopwords=None):
             continue
         v2[all_words.index(w)] += 1
     return 1 -cosine_distance(v1, v2)
+   
+#building similarity matrix
+def build_SimilarityMatrix(sentences, stop_words):
+    # Creating an empty similarity matrix
+    similarity_matrix = np.zeros((len(sentences), len(sentences)))
+ 
+    for index1 in range(len(sentences)):
+        for index2 in range(len(sentences)):
+            if index1 == index2: #ignore if both are same sentences
+                continue 
+            similarity_matrix[index1][index2] = sent_similarity(sentences[index1], sentences[index2], stop_words)
+
+    return similarity_matrix
+
