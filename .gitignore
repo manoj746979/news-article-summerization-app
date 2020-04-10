@@ -12,3 +12,9 @@ def read_article(file_name):
     filedata=file.readlines()
     artcle = filedata[0].split(". ")
     sentences = []
+    
+    for sentence in article:
+        print(sentence)
+        sentence.append(sentence.replace("[^a-zA-Z]"," ").split(" "))
+        sentence.pop()
+    return sentences
