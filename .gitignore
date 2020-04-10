@@ -1,7 +1,7 @@
 #libraries
 
 import numpy as np
-import nltk.corpus import stopword
+from nltk.corpus import stopwords
 from nltk.cluster.util import cosine_distance
 import networkx as nx
 
