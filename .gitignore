@@ -3,7 +3,7 @@
 import numpy as np
 from nltk.corpus import stopwords
 from nltk.cluster.util import cosine_distance
-import networkx as nx
+import networkx
 
 #clean sentences generator
 
@@ -57,4 +57,35 @@ def build_SimilarityMatrix(sentences, stop_words):
             similarity_matrix[index1][index2] = sent_similarity(sentences[index1], sentences[index2], stop_words)
 
     return similarity_matrix
-
+    
+ #Here we well be using the code to generate the summary
+ def generate_summary(file_name,top_n = 5):
+     stop_word = stopwords.words('english')
+     summarize_text = []
+     
+     #step 1
+     #reading news articles and splitig it in to the sentence
+     sentences = read_article(file_name):
+     
+     #step2
+     #generating similarity matrix across the sentences
+     sentence_similarity_martix  = build_SimilarityMatrix(sentences, stop_words)
+     
+     #step3
+     #Rank sentences in similarity martix
+     sentence_similarity_graph = networkx.from_numpy_array(sentence_similarity_martix)
+     scores = networkx.pagerank(sentence_similarity_graph)
+     
+    #step4
+    #sort the rank and pick the top rank sentences
+    ranked_sentence = sorted(((scores[i],s) for i,s in enumarate(senences)),reverse = True)
+    print("Indexes of top ranked_sentence order are ", ranked_sentence)
+    
+    for i in range(top_n):
+        summarize_text.append(" ".join(ranked_sentence[i][1]))
+     
+    #step5
+    #output of summarize text
+    print("Summarize Text: \n",". ".join(summarize_text))
+#let's begin
+generate_summary("msft.txt",2)
