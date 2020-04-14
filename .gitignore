@@ -10,14 +10,14 @@ import networkx
 def read_article(file_name):
     file = open(file_name,"r")
     filedata=file.readlines()
-    artcle = filedata[0].split(". ")
+    article = filedata[0].split(". ")
     sentences = []
     
     for sentence in article:
         print(sentence)
-        sentence.append(sentence.replace("[^a-zA-Z]"," ").split(" "))
-        sentence.pop()
-    return sentences
+        sentences.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
+     sentences.pop()
+     return sentences
     
 #using similarity matrix
 def sent_similarity(sentence1, sentence2, stopwords=None):
@@ -60,7 +60,7 @@ def build_SimilarityMatrix(sentences, stop_words):
     
 #Here we well be using the code to generate the summary
 def generate_summary(file_name,top_n = 5):
-    stop_word = stopwords.words('english')
+    stop_words = stopwords.words('english')
     summarize_text = []
      
     #step 1
